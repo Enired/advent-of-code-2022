@@ -25,8 +25,8 @@ const cleanup = (data) => {
 
     //Case: Range of Right is fully within range of left
     if(
-      leftMin <= rightMin &
-      leftMax >= rightMax
+      leftMin <= rightMax &
+      left
       ){
         return count++
       }
@@ -45,4 +45,4 @@ const cleanup = (data) => {
 };
 
 console.log('Test', cleanup(testData))
-console.log('Real', cleanup(realData))
+// console.log('Real', cleanup(realData))
