@@ -18,25 +18,16 @@ const cleanup = (data) => {
 
 
   cleanupAssignments.forEach(pair => {
-    const leftMin = pair.left.min
-    const leftMax = pair.left.max
-    const rightMin = pair.right.min
-    const rightMax = pair.right.max
+    const leftMin = pair.left.min;
+    const leftMax = pair.left.max;
+    const rightMin = pair.right.min;
+    const rightMax = pair.right.max;
 
     //Case: Range of Right is fully within range of left
-    if(
-      leftMin <= rightMax &
-      left
-      ){
-        return count++
-      }
-      if(
-      //Case: Range of Left is fully within range of right
-      rightMin <= leftMin &
-      rightMax >= leftMax
-      
-    ){
-      return count++
+    if (
+      (leftMin <= rightMin & leftMax >= rightMin) || (rightMin <= leftMin & rightMax >= leftMin)
+    ) {
+      return count++;
     }
   });
 
@@ -45,4 +36,4 @@ const cleanup = (data) => {
 };
 
 console.log('Test', cleanup(testData))
-// console.log('Real', cleanup(realData))
+console.log('Real', cleanup(realData))
