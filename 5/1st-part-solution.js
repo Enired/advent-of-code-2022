@@ -7,11 +7,13 @@ const supplyStacks = (input) => {
 
   let stackDiagram = data.split('\n\n').shift().split('\n')
   stackDiagram = stackDiagram.map(e=>e.split('\t'))
+  const stackDiagramNumberPositions = stackDiagram.pop().shift().split('')
 
   const instructions = data.split('\n\n').pop().split('\n')
 
 
-  return stackDiagram
+  console.log(stackDiagram)
+  return stackDiagramNumberPositions
 }
 console.log('Test Case Stacks')
 console.log(supplyStacks(testData))
