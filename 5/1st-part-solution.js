@@ -16,7 +16,7 @@ const supplyStacks = (input) => {
   }
 
 
-  stackDiagram.reverse().forEach((stack,index) => {
+  stackDiagram.reverse().forEach((stack) => {
     let stackNumber = 1
     for(let i = 1; i < stack[0].length; i+=4){
       stackObj[stackNumber].push(stack[0][i])
