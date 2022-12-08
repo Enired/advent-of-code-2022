@@ -5,9 +5,13 @@ const realData = './input.txt'
 const supplyStacks = (input) => {
   let data = fs.readFileSync(input, 'utf-8')
 
-  const stackDiagram = data.split('\n\n').shift()
+  let stackDiagram = data.split('\n\n').shift().split('\n')
+  stackDiagram = stackDiagram.map(e=>e.split('\t'))
+
   const instructions = data.split('\n\n').pop().split('\n')
-  return instructions;
+
+
+  return stackDiagram
 }
 console.log('Test Case Stacks')
 console.log(supplyStacks(testData))
