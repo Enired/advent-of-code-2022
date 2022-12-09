@@ -1,48 +1,35 @@
 const fs = require('fs');
 const testData = './test-input.txt'
+const realData = './input.txt'
 
 const tuner = (input) => {
   const dataStream = fs.readFileSync(input, 'utf-8')
 
   let marker = {
     code: [],
-    start: 1
+    start: 0
   }
   for(i=0; i < dataStream.length; i++){
-    if(i+4 <= dataStream.length){
+    if(i <= dataStream.length){
       const currentChar = dataStream[i]
-      if((marker.code).includes(currentChar)){
-        marker.code = marker.code.slice(0,marker.code.indexOf(currentChar))
+      if(marker.code.includes(currentChar)){
+        marker.code = marker.code.slice(marker.code.lastIndexOf(currentChar) + 1)
       }
-      
-        marker.code.push(currentChar)
-        marker.start++
-      
+      marker.code.push(currentChar)
+      marker.start++
 
-      if(marker.code.length === 4){
-        return marker.start
+      if(marker.code.length===4){
+        return marker
       }
-
-
-      // const markerHead = dataStream[i]
-      // const restOfMarker = dataStream.substring(i+1,i+4)
-
-      // if(restOfMarker.includes(markerHead)){
-      //   console.log(markerHead)
-      //   console.log(restOfMarker)
-      //   return i+4
-      // }
-
-
-
     }
   }
 
 
 
-  return false
+  return marker
 
 
 }
 
-console.log(tuner(testData))
+// console.log(tuner(testData))
+console.log(tuner(realData))
