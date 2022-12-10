@@ -26,7 +26,7 @@ const measureD = (input) => {
 
   //Determining Size of each directory not including the size of any subfolders
   terminalOutput.forEach(command=>{
-    if(command.includes('cd')){
+    if(command.split(' ')[1]==='cd'){
       //Move out
       if(command.includes('..')){
         dirHistory.pop()
@@ -41,7 +41,7 @@ const measureD = (input) => {
     }
     else{
       if(!command.includes('$')){
-        if(command.includes('dir')){
+        if(command.split(' ')[0]==='dir'){
           const dirLetter = command.split(' ')[1]
           sysDirectories[currentDir].subfolders.push(dirLetter)
         }
@@ -54,21 +54,44 @@ const measureD = (input) => {
     }
   })
 
-
-  Object.values(sysDirectories).forEach((dir)=>{
-    dir.subfolders.forEach((subDir => {
-      dir.size += sysDirectories[subDir].size
-    }))
-  })
-
-  let total = 0;
-  Object.values(sysDirectories).forEach(dir=>{
-    if(dir.size <= maxSize){
-      total+=dir.size
+  const subDigger = (directory) =>{
+    if(directory.subfolders.length === 0){
+      // console.log('yo')
+      return directory.size
     }
+    else{
+      directory.subfolders.forEach((sub)=>{
+        directory.size += subDigger(sysDirectories[sub])
+      })
+
+      console.log('hey')
+
+    }
+  }
+
+
+
+  // Object.values(sysDirectories).forEach((dir)=>{
+  //   dir.subfolders.forEach((subDir => {
+  //     // dir.size += sysDirectories[subDir].size
+
+  //     dir.size += subDigger(sysDirectories[subDir])
+  //   }))
+  // })
+
+  // let total = 0;
+  // Object.values(sysDirectories).forEach(dir=>{
+  //   if(dir.size <= maxSize){
+  //     total+=dir.size
+  //   }
+  // })
+
+  Object.values(sysDirectories).forEach(directory=> {
+    subDigger(directory)
   })
 
-  return total
+  console.log(sysDirectories)
+  return 0
 }
 
 console.log(measureD(testInput)) // TestData
