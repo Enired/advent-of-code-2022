@@ -54,20 +54,20 @@ const measureD = (input) => {
     }
   })
 
-  const subDigger = (directory) =>{
-    if(directory.subfolders.length === 0){
-      // console.log('yo')
-      return directory.size
-    }
-    else{
-      directory.subfolders.forEach((sub)=>{
-        directory.size += subDigger(sysDirectories[sub])
-      })
+  // const subDigger = (directory) =>{
+  //   if(directory.subfolders.length === 0){
+  //     // console.log('yo')
+  //     return directory.size
+  //   }
+  //   else{
+  //     directory.subfolders.forEach((sub)=>{
+  //       directory.size += subDigger(sysDirectories[sub])
+  //     })
 
-      console.log('hey')
+  //     console.log('hey')
 
-    }
-  }
+  //   }
+  // }
 
 
 
@@ -86,9 +86,9 @@ const measureD = (input) => {
   //   }
   // })
 
-  Object.values(sysDirectories).forEach(directory=> {
-    subDigger(directory)
-  })
+  // Object.values(sysDirectories).forEach(directory=> {
+  //   subDigger(directory)
+  // })
 
   console.log(sysDirectories)
   return 0
