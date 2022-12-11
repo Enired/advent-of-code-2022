@@ -1,3 +1,4 @@
+const { dir } = require('console');
 const fs = require('fs')
 const testInput = './test-input.txt'
 
@@ -7,6 +8,7 @@ const measureD = (input) => {
   
   const sysDirectories = {
     '/': {
+      name: '/',
       subfolders: [],
       size: 0
     }
@@ -16,7 +18,9 @@ const measureD = (input) => {
   terminalOutput.forEach(command => {
     if(command.includes('dir')){
       const directory = command.split(' ')[1];
-      sysDirectories[directory] = { subfolders: [],
+      sysDirectories[directory] = { 
+        name: directory,
+        subfolders: [],
         size: 0};
     }
   })
@@ -54,41 +58,28 @@ const measureD = (input) => {
     }
   })
 
-  // const subDigger = (directory) =>{
-  //   if(directory.subfolders.length === 0){
-  //     // console.log('yo')
-  //     return directory.size
-  //   }
-  //   else{
-  //     directory.subfolders.forEach((sub)=>{
-  //       directory.size += subDigger(sysDirectories[sub])
-  //     })
 
-  //     console.log('hey')
+  const subFolderSize = (folder) => { //Object of the contents 
+    console.log(folder.name)
+    if(folder.subfolders.length === 0){
+      folder.size += sysDirectories[subfolder].size
+      // folder.subfolders.forEach((subfolder)=>{
+      //   folder.size += sysDirectories[subfolder].size
+      // })
 
-  //   }
-  // }
+    }
+    else{
+      console.log('none')
+    }
+    return 0
+  }
 
+  Object.values(sysDirectories).forEach((val)=>{
+    subFolderSize(val)
+   
+    // console.log(val.subfolders)
+  })
 
-
-  // Object.values(sysDirectories).forEach((dir)=>{
-  //   dir.subfolders.forEach((subDir => {
-  //     // dir.size += sysDirectories[subDir].size
-
-  //     dir.size += subDigger(sysDirectories[subDir])
-  //   }))
-  // })
-
-  // let total = 0;
-  // Object.values(sysDirectories).forEach(dir=>{
-  //   if(dir.size <= maxSize){
-  //     total+=dir.size
-  //   }
-  // })
-
-  // Object.values(sysDirectories).forEach(directory=> {
-  //   subDigger(directory)
-  // })
 
   console.log(sysDirectories)
   return 0

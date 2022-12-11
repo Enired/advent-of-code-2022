@@ -12,7 +12,11 @@ dir e
 62596 h.lst
 $ cd e
 $ ls
+dir z
 584 i
+$ cd z
+1 x
+$cd ..
 $ cd ..
 $ cd ..
 $ cd d
