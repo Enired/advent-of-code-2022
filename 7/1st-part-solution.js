@@ -60,22 +60,31 @@ const measureD = (input) => {
 
 
   const subFolderSize = (folder) => { //Object of the contents 
+    let addToParent = 0
     console.log(folder.name)
     if(folder.subfolders.length === 0){
-      folder.size += sysDirectories[subfolder].size
+      return folder.size
+
       // folder.subfolders.forEach((subfolder)=>{
       //   folder.size += sysDirectories[subfolder].size
       // })
-
+      // folder.subfolders.forEach((subfolder)=>{
+      //   folder.size += sysDirectories[subfolder].size
+      // })
+      
     }
     else{
-      console.log('none')
+      folder.subfolders.forEach((subfolder)=>{
+        const subfolderObj = sysDirectories[subfolder]
+        addToParent += subFolderSize(subfolderObj)
+
+      })
     }
-    return 0
+    return addToParent
   }
 
   Object.values(sysDirectories).forEach((val)=>{
-    subFolderSize(val)
+    val.size += subFolderSize(val)
    
     // console.log(val.subfolders)
   })
