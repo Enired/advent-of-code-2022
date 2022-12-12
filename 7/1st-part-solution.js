@@ -1,9 +1,9 @@
-const { dir } = require('console');
 const fs = require('fs')
 const testInput = './test-input.txt'
+const realInput = './input.txt'
 
 const measureD = (input) => {
-  const terminalOutput = fs.readFileSync(testInput, 'utf-8').split('\n');
+  const terminalOutput = fs.readFileSync(input, 'utf-8').split('\n');
   const maxSize = 100000;
   
   const sysDirectories = {
@@ -59,14 +59,18 @@ const measureD = (input) => {
   })
 
 
+  let depth = 0;
   const addSubFolderSize = (folder) => { //Object of the contents 
     let folderSize = folder.size
     const subfolders = folder.subfolders
 
+    depth++
+    console.log(depth)
     if(subfolders.length !== 0){
-      subfolders.forEach(folder=>{
-        folderSize += addSubFolderSize(sysDirectories[folder])
-      })
+      for(let i = 0; i<subfolders.length; i++){
+        folderSize += addSubFolderSize(sysDirectories[subfolders[i]])
+
+      }
     }
 
     return folderSize
@@ -78,6 +82,8 @@ const measureD = (input) => {
   contentOfSys.forEach((content)=>{
     content.size = addSubFolderSize(content)
   })
+
+  
   let total= 0
   
   contentOfSys.forEach((content)=>{
@@ -86,7 +92,9 @@ const measureD = (input) => {
     }
   })
   console.log(sysDirectories)
+  // return 0
   return total
 }
 
 console.log(measureD(testInput)) // TestData
+// console.log(measureD(realInput)) // TestData
